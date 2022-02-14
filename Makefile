@@ -6,7 +6,7 @@ dist.savf: /qsys.lib/${BUILDLIB}.lib/hello.pgm
 	cp /qsys.lib/${BUILDLIB}.lib/dist.file ./dist.savf
 
 cleanlib:
-	system "DLTLIB ${BUILDLIB}"
+	system "DLTLIB ${BUILDLIB}" || echo library already gone
 
 dist: dist.savf cleanlib
 
@@ -20,5 +20,4 @@ dist: dist.savf cleanlib
 
 all: dist
 
-clean:
-	rm -fr $(shell pwd)
+clean: cleanlib

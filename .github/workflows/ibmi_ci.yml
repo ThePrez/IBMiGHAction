@@ -41,6 +41,9 @@ jobs:
       run: $ssh_command "cd $remote_build_dir && BUILDLIB=GH${{env.short_sha}} /QOpenSys/pkgs/bin/gmake -e dist"
     - name: Retrieve artifact
       run: $scp_dist_command
-    - name: Cleanup remote build locs
+    - name: Cleanup remote build lib
       if: always()
       run: $ssh_command "cd $remote_build_dir && BUILDLIB=GH${{env.short_sha}} /QOpenSys/pkgs/bin/gmake -e clean"
+    - name: Cleanup remote build dir
+      if: always()
+      run: $ssh_command "rm -fr $remote_build_dir"
